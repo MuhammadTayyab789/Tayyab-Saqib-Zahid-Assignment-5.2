@@ -1,6 +1,6 @@
 // src/screens/HomeScreen.tsx
 import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet, Button } from 'react-native';
 import ProfileCard from '../Components/ProfileCard';
 import { Profile } from '../type/Profile';
 import { StackNavigationProp } from '@react-navigation/stack';
@@ -30,6 +30,14 @@ const profiles: Profile[] = [
     department: 'Digital IT',
     company: 'Bank Alfalah',
    
+  },{
+    id: '3',
+    name: 'Zahid Hussain',
+    email: 'zahidhussain@gmail.com',
+    phone: '555-5678',
+    department: 'Digital IT',
+    company: 'Bank Alfalah',
+   
   },
   // Add more profiles as needed
 ];
@@ -41,7 +49,9 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
         data={profiles}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
+        
           <ProfileCard
+
             profile={item}
             onPress={() => navigation.navigate('Detail', { profile: item })}
           />

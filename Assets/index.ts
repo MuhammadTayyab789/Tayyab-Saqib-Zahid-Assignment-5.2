@@ -1,0 +1,1 @@
+const Biometric = require('../Assets/FingerPrint.png')
