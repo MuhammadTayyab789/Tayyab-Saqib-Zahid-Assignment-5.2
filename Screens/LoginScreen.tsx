@@ -8,7 +8,7 @@ import {
   Alert,
   SafeAreaView,
 } from 'react-native';
-
+   
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -26,18 +26,22 @@ const LoginScreen = () => {
     <View style={styles.container}>
         <View style={styles.titleContainer}>
           <Text style={styles.titletext}>Welcome to Infinity</Text>
-           <Text style={styles.subtitletext}>Save and Grow</Text>
-            <Text style={styles.subtitletext}>Smart Money , Smart Lfe</Text>
+           <Text style={styles.titletext}> Save & Grow</Text>
+           <Text style={styles.titletext}> Smart Money, Smart Live</Text>
         </View>
 
-        <TextInput
+       {/* <TextInput
           style={styles.input}
           placeholder="User name"
           keyboardType="email-address"
           autoCapitalize="none"
           value={email}
           onChangeText={setEmail}
-        />
+        />*/}
+        <TextInput style={styles.input}
+        placeholder="Login ID"
+        />   
+        
 
         <TextInput
           style={styles.input}
@@ -70,13 +74,13 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f8ededff',
   },
   container: {
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 24,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#eecbcbff',
     flexDirection:"column"
   },
   titleContainer: {
@@ -86,7 +90,7 @@ const styles = StyleSheet.create({
     marginVertical:2,
   },
   titletext: {
-    fontSize:32,
+    fontSize:24,
     fontWeight: '700',
     color: '#B10808',
   },
