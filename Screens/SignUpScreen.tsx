@@ -9,7 +9,7 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-
+import { useNavigation } from '@react-navigation/native';
 // Month data
 const months = [
   { label: 'Jan', value: '01' },
@@ -39,6 +39,8 @@ const years = Array.from({ length: 76 }, (_, i) => ({
 }));
 
 const SignUpScreen = () => {
+const navigation = useNavigation();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -52,15 +54,11 @@ const SignUpScreen = () => {
   const [dateFocus, setDateFocus] = useState(false);
   const [yearFocus, setYearFocus] = useState(false);
 
-  const handleLogin = () => {
-    if (!email || !password) {
-      Alert.alert('Error', 'Please enter both email and password.');
-      return;
-    }
-    Alert.alert(
-      'Login',
-      `Email: ${email}\nPassword: ${password}\nDOB: ${month}/${date}/${year}`
-    );
+
+  
+
+  const gotoDashboard = () => {
+     navigation.navigate('Dashboard');
   };
 
   return (
@@ -182,7 +180,7 @@ const SignUpScreen = () => {
 
 
 
-        <TouchableOpacity style={styles.button2} onPress={handleLogin}>
+        <TouchableOpacity style={styles.button2} onPress={gotoDashboard}>
           <Text style={styles.signuptext}>Create Profile </Text>
         </TouchableOpacity>
       </View>

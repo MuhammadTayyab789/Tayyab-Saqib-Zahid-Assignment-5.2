@@ -9,7 +9,8 @@ import { store } from './store/store';
 import { SafeAreaView, StatusBar } from 'react-native';
 import CounterScreen from './Screens/CounterScreen';
 import LoginScreen from './Screens/LoginScreen';
-import SignUpScreen from './Screens/SignUpScreen';  
+import SignUpScreen from './Screens/SignUpScreen'; 
+import DashboardScreen from './Screens/Dashboard'; 
 
 
 
@@ -24,7 +25,7 @@ export default function App() {
         <Stack.Screen name="Detail" component={DetailScreen} />
           <Stack.Screen name ="Login Screen" component={LoginScreen} />
           <Stack.Screen name ="Signup Screen" component={SignUpScreen} />
-
+          <Stack.Screen name="Dashboard" component={DashboardScreen} />
       </Stack.Navigator>
     </NavigationContainer>
 
