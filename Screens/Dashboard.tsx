@@ -6,19 +6,30 @@ import {
   Animated,
   Switch,
   StatusBar,
+  Button
 } from 'react-native';
+ import { useTranslation } from 'react-i18next'
+ import { format } from 'date-fns';
 
+import { Trans } from 'react-i18next';
+import '../local/index';
 const DashboardScreen = () => {
   // 🌗 Theme toggle
   const [isDark, setIsDark] = useState(false);
   const toggleTheme = () => setIsDark(prev => !prev);
-
+ const { t, i18n } = useTranslation()
   // Animations
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideDown = useRef(new Animated.Value(-200)).current;
   const slideUp = useRef(new Animated.Value(200)).current;
   const slideRight = useRef(new Animated.Value(200)).current;
   const slideLeft = useRef(new Animated.Value(-200)).current;
+
+ const switchLanguage = () => {
+ const newLang = i18n.language === 'en' ? 'ur' : 'en';
+i18n.changeLanguage(newLang);
+ };
+
 
   const fadeIn = () => {
     Animated.timing(fadeAnim, {
@@ -59,7 +70,7 @@ const DashboardScreen = () => {
       useNativeDriver: true,
     }).start();
   };
-
+  
   useEffect(() => {
     slidedown();
     slideup();
@@ -71,13 +82,13 @@ const DashboardScreen = () => {
   // 🎨 Dynamic colors based on theme
   const themeStyles = {
     container: {
-      backgroundColor: isDark ? '#121212' : '#ffffff',
+      backgroundColor: isDark ? '#121212' : '#cfbebeff',
     },
     text: {
       color: isDark ? '#ffffff' : '#B10808',
     },
     box: {
-      backgroundColor: isDark ? '#333' : '#F9E6E6',
+      backgroundColor: isDark ? '#333' : '#d1aaaaff',
     },
   };
 
@@ -96,10 +107,12 @@ const DashboardScreen = () => {
       <View style={styles.titleContainer}>
         <Animated.View style={{ transform: [{ translateY: slideDown }] }}>
           <Text style={[styles.titletext, themeStyles.text]}>
-            Welcome Tayyab
+           {t('welcome')} Tayyab
           </Text>
         </Animated.View>
       </View>
+
+      <Text style={styles.subtitletext}>{t('Date')} </Text> 
 
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Animated.View style={{ transform: [{ translateX: slideLeft }] }}>
@@ -167,6 +180,10 @@ const DashboardScreen = () => {
           ))}
         </View>
       </Animated.View>
+       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+ <Text style={{ fontSize: 20 }}>{t('welcome')}</Text>
+ <Button title={t('change_lang')} onPress={switchLanguage} />
+ </View>
     </View>
   );
 };
