@@ -11,7 +11,7 @@ import CounterScreen from './Screens/CounterScreen';
 import LoginScreen from './Screens/LoginScreen';
 import SignUpScreen from './Screens/SignUpScreen'; 
 import DashboardScreen from './Screens/Dashboard'; 
-
+import Outflow from './Screens/OutlowScreen';
 
 
 
@@ -26,6 +26,7 @@ export default function App() {
           <Stack.Screen name ="Login Screen" component={LoginScreen} />
           <Stack.Screen name ="Signup Screen" component={SignUpScreen} />
           <Stack.Screen name="Dashboard" component={DashboardScreen} />
+          <Stack.Screen name="OutFlows" component={Outflow} />
       </Stack.Navigator>
     </NavigationContainer>
 

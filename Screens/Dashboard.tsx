@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect,useCallback } from 'react';
 import {
   View,
   Text,
@@ -6,10 +6,15 @@ import {
   Animated,
   Switch,
   StatusBar,
-  Button
+  Button,
+  Modal,
+  TouchableOpacity
 } from 'react-native';
  import { useTranslation } from 'react-i18next'
  import { format } from 'date-fns';
+import { useNavigation } from '@react-navigation/native';
+ 
+
 
 import { Trans } from 'react-i18next';
 import '../local/index';
@@ -17,6 +22,9 @@ const DashboardScreen = () => {
   // 🌗 Theme toggle
   const [isDark, setIsDark] = useState(false);
   const toggleTheme = () => setIsDark(prev => !prev);
+  
+  const navigation = useNavigation();
+   const [visible, setVisible] = useState(false);
  const { t, i18n } = useTranslation()
   // Animations
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -29,7 +37,14 @@ const DashboardScreen = () => {
  const newLang = i18n.language === 'en' ? 'ur' : 'en';
 i18n.changeLanguage(newLang);
  };
+ const handleSheetChanges = useCallback((index: number) => {
+    console.log('handleSheetChanges', index);
+  }, []);
 
+
+ const gotoOutflows = () => {
+     navigation.navigate('OutFlows');
+  };
 
   const fadeIn = () => {
     Animated.timing(fadeAnim, {
@@ -124,10 +139,13 @@ i18n.changeLanguage(newLang);
         </Animated.View>
 
         <Animated.View style={{ transform: [{ translateX: slideRight }] }}>
-          <View style={[styles.box, themeStyles.box]}>
-            <Text style={[styles.subtitletext, themeStyles.text]}>
+          <View style={[styles.box, themeStyles.box]} >
+            <TouchableOpacity onPress={gotoOutflows }>
+              <Text style={[styles.subtitletext, themeStyles.text]}>
               Outflows PKR 60,000
             </Text>
+            </TouchableOpacity>
+            
           </View>
         </Animated.View>
       </View>
