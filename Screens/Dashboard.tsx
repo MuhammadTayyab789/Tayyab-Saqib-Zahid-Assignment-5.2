@@ -45,6 +45,12 @@ i18n.changeLanguage(newLang);
  const gotoOutflows = () => {
      navigation.navigate('OutFlows');
   };
+ const gotoAddUSer = () => {
+     navigation.navigate('AddUser');
+  };
+ const gotoAllUsers = () => {
+     navigation.navigate('AllUsers');
+  };
 
   const fadeIn = () => {
     Animated.timing(fadeAnim, {
@@ -132,15 +138,17 @@ i18n.changeLanguage(newLang);
       <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
         <Animated.View style={{ transform: [{ translateX: slideLeft }] }}>
           <View style={[styles.box, themeStyles.box]}>
+             <TouchableOpacity onPress={gotoAddUSer }>
             <Text style={[styles.subtitletext, themeStyles.text]}>
               Inflows PKR 100,000
             </Text>
+            </TouchableOpacity>
           </View>
         </Animated.View>
 
         <Animated.View style={{ transform: [{ translateX: slideRight }] }}>
           <View style={[styles.box, themeStyles.box]} >
-            <TouchableOpacity onPress={gotoOutflows }>
+            <TouchableOpacity onPress={gotoAllUsers }>
               <Text style={[styles.subtitletext, themeStyles.text]}>
               Outflows PKR 60,000
             </Text>

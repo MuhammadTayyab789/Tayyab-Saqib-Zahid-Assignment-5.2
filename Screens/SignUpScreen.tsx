@@ -10,6 +10,9 @@ import {
 } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useNavigation } from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+
 // Month data
 const months = [
   { label: 'Jan', value: '01' },
@@ -38,6 +41,8 @@ const years = Array.from({ length: 76 }, (_, i) => ({
   value: (1950 + i).toString(),
 }));
 
+
+
 const SignUpScreen = () => {
 const navigation = useNavigation();
 
@@ -55,7 +60,42 @@ const navigation = useNavigation();
   const [yearFocus, setYearFocus] = useState(false);
 
 
-  
+  const handleSignUp = async () => {
+  if (!email || !password) {
+    Alert.alert('Error', 'Email and password are required.');
+    return;
+  }
+
+  try {
+    // Create user in Firebase Auth
+    const userCredential = await auth().createUserWithEmailAndPassword(email, password);
+    const { uid } = userCredential.user;
+
+    // Save user details to Firestore
+    await firestore().collection('users').doc(uid).set({
+      name: email,   // replace with your "Name" input
+      email: email,
+      dob: `${date}-${month}-${year}`,
+      gender: 'Male', // or from selection
+      createdAt: firestore.FieldValue.serverTimestamp(),
+    });
+   Alert.alert('Signup', 'Signup successfully!');
+    navigation.reset({
+  index: 0,
+  routes: [{ name: "Login Screen" }],
+});
+
+  } catch (error) {
+    console.error(error);
+   if (error instanceof Error) {
+    console.error(error.message);
+    Alert.alert('Error', error.message);
+  } else {
+    console.error(error);
+    Alert.alert('Error', String(error));
+  }
+  }
+};
 
   const gotoDashboard = () => {
      navigation.navigate('Dashboard');
@@ -180,7 +220,7 @@ const navigation = useNavigation();
 
 
 
-        <TouchableOpacity style={styles.button2} onPress={gotoDashboard}>
+        <TouchableOpacity style={styles.button2} onPress={handleSignUp}>
           <Text style={styles.signuptext}>Create Profile </Text>
         </TouchableOpacity>
       </View>
@@ -218,7 +258,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 16,
     marginBottom: 16,
-    borderColor: '#ccc',
+   // borderColor: '#ccc',
     borderWidth: 1,
     elevation: 5,
     borderColor:'#B10808'
@@ -232,8 +272,8 @@ const styles = StyleSheet.create({
   dropdown: {
     flex: 1,
     height: 50,
-    borderColor: 'gray',
-    borderWidth: 0.5,
+    //borderColor: 'gray',
+    //borderWidth: 0.5,
     borderRadius: 8,
     paddingHorizontal: 8,
     marginHorizontal: 4,

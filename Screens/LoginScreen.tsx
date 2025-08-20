@@ -8,20 +8,44 @@ import {
   Alert,
   SafeAreaView,
 } from 'react-native';
-   
+import auth from '@react-native-firebase/auth';
+   import { useNavigation } from "@react-navigation/native";
+
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    if (!email || !password) {
-      Alert.alert('Error', 'Please enter both email and password.');
-      return;
+  const navigation = useNavigation();
+    const gotoSignUP =()=>{
+   navigation.navigate("Signup Screen")
     }
-
-    Alert.alert('Login', `Email: ${email}\nPassword: ${password}`);
-  };
-
+  const handleLogin = async () => {
+  if (!email || !password) {
+    Alert.alert('Error', 'Please enter both email and password.');
+    return;
+  }
+  
+  try {
+    await auth().signInWithEmailAndPassword(email, password);
+    Alert.alert('Success', 'Logged in successfully!');
+    // navigate to dashboard
+    // navigation.navigate('Dashboard');
+    navigation.reset({
+        index: 0,
+        routes: [{ name: "Dashboard" }], // 👈 reset so user can't go back
+      });
+  } catch (error) {
+    console.error(error);
+       if (error instanceof Error) {
+        console.error(error.message);
+        Alert.alert('Error', error.message);
+      } else {
+        console.error(error);
+        Alert.alert('Error', String(error));
+      }
+  }
+};
+  
   return (
     <View style={styles.container}>
         <View style={styles.titleContainer}>
@@ -40,6 +64,9 @@ const LoginScreen = () => {
         />*/}
         <TextInput style={styles.input}
         placeholder="Login ID"
+        
+          value= {email}
+          onChangeText={setEmail}
         />   
         
 
@@ -55,15 +82,15 @@ const LoginScreen = () => {
           <Text style={styles.buttonText}>Log In</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button2} onPress={handleLogin}>
+        <TouchableOpacity style={styles.button2} onPress={gotoSignUP}>
           <Text style={styles.signuptext}>Sign up </Text>
         </TouchableOpacity>
 
-        <View style={{ alignItems: 'center', marginTop: 16 }}>
+      {/*  <View style={{ alignItems: 'center', marginTop: 16 }}>
           <View style={styles.box}>
             <Text>abc</Text>
                </View>
-</View>
+</View>*/}
 
       </View>
   );

@@ -12,7 +12,8 @@ import LoginScreen from './Screens/LoginScreen';
 import SignUpScreen from './Screens/SignUpScreen'; 
 import DashboardScreen from './Screens/Dashboard'; 
 import Outflow from './Screens/OutlowScreen';
-
+import AddUsercreen from './Screens/AddUserScreen';
+import AllUsersScreen from './Screens/AllUsers';
 
 
 const Stack = createNativeStackNavigator();
@@ -20,13 +21,16 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Signup Screen" screenOptions={{headerShown:false}} >
+      <Stack.Navigator initialRouteName="Login Screen" screenOptions={{headerShown:false}} >
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Detail" component={DetailScreen} />
           <Stack.Screen name ="Login Screen" component={LoginScreen} />
           <Stack.Screen name ="Signup Screen" component={SignUpScreen} />
           <Stack.Screen name="Dashboard" component={DashboardScreen} />
           <Stack.Screen name="OutFlows" component={Outflow} />
+            <Stack.Screen name="AddUser" component={AddUsercreen} />
+             <Stack.Screen name="AllUsers" component={AllUsersScreen} />
+
       </Stack.Navigator>
     </NavigationContainer>
 
