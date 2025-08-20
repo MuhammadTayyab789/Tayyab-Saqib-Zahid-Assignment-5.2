@@ -51,6 +51,9 @@ i18n.changeLanguage(newLang);
  const gotoAllUsers = () => {
      navigation.navigate('AllUsers');
   };
+   const gotoAsynList= () => {
+     navigation.navigate('AsyncList');
+  };
 
   const fadeIn = () => {
     Animated.timing(fadeAnim, {
@@ -160,10 +163,13 @@ i18n.changeLanguage(newLang);
 
       <View style={{ marginTop: 20 }}>
         <Animated.View style={{ transform: [{ translateX: slideLeft }] }}>
+          
           <View style={[styles.box3, themeStyles.box]}>
+            <TouchableOpacity onPress={gotoAsynList }>
             <Text style={[styles.subtitletext, themeStyles.text]}>
-              Remaining PKR 40,000
+              To do List
             </Text>
+            </TouchableOpacity>
           </View>
         </Animated.View>
       </View>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import HomeScreen from './Screens/HomeScreen';
 import DetailScreen from './Screens/DetailScreen';
 import { Profile } from './type/Profile';
@@ -14,12 +15,13 @@ import DashboardScreen from './Screens/Dashboard';
 import Outflow from './Screens/OutlowScreen';
 import AddUsercreen from './Screens/AddUserScreen';
 import AllUsersScreen from './Screens/AllUsers';
-
+import AsyncListScreen from './Screens/AsyncListScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
+     <GestureHandlerRootView style={{ flex: 1 }}>
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login Screen" screenOptions={{headerShown:false}} >
         <Stack.Screen name="Home" component={HomeScreen} />
@@ -30,9 +32,11 @@ export default function App() {
           <Stack.Screen name="OutFlows" component={Outflow} />
             <Stack.Screen name="AddUser" component={AddUsercreen} />
              <Stack.Screen name="AllUsers" component={AllUsersScreen} />
+               <Stack.Screen name="AsyncList" component={AsyncListScreen} />
 
       </Stack.Navigator>
     </NavigationContainer>
+    </GestureHandlerRootView>
 
     
   );
