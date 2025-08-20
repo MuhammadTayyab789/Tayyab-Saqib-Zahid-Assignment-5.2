@@ -54,6 +54,9 @@ i18n.changeLanguage(newLang);
    const gotoAsynList= () => {
      navigation.navigate('AsyncList');
   };
+  const gotoBottomSheet= () => {
+     navigation.navigate('Bottomsheet');
+  };
 
   const fadeIn = () => {
     Animated.timing(fadeAnim, {
@@ -177,9 +180,11 @@ i18n.changeLanguage(newLang);
       <View style={{ marginTop: 20 }}>
         <Animated.View style={{ transform: [{ translateX: slideRight }] }}>
           <View style={[styles.box3, themeStyles.box]}>
+            <TouchableOpacity onPress={gotoBottomSheet }>
             <Text style={[styles.subtitletext, themeStyles.text]}>
               Save / Invest
             </Text>
+            </TouchableOpacity>
           </View>
         </Animated.View>
       </View>

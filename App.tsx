@@ -1,3 +1,4 @@
+import 'react-native-reanimated';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -16,6 +17,7 @@ import Outflow from './Screens/OutlowScreen';
 import AddUsercreen from './Screens/AddUserScreen';
 import AllUsersScreen from './Screens/AllUsers';
 import AsyncListScreen from './Screens/AsyncListScreen';
+import BottomSheetScreen from './Screens/BottomSheetScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +35,7 @@ export default function App() {
             <Stack.Screen name="AddUser" component={AddUsercreen} />
              <Stack.Screen name="AllUsers" component={AllUsersScreen} />
                <Stack.Screen name="AsyncList" component={AsyncListScreen} />
+                <Stack.Screen name="Bottomsheet" component={BottomSheetScreen} />
 
       </Stack.Navigator>
     </NavigationContainer>
